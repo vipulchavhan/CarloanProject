@@ -1,0 +1,26 @@
+package com.vip.CarLoanRegistation.app.model;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Profession {
+@Id	
+@GeneratedValue(strategy = GenerationType.AUTO)
+private Integer proId;
+@OneToOne(cascade = CascadeType.ALL)
+private SelfEmployee selfEmployee;
+@OneToOne(cascade = CascadeType.ALL)
+private NonselfEmployee nonSelfEmployee;
+}

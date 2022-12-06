@@ -1,0 +1,31 @@
+package com.vip.CarLoanRegistation.app.controller;
+
+import javax.imageio.spi.RegisterableService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.vip.CarLoanRegistation.app.model.RegistrationDetails;
+
+@RestController
+public class RegistrationController {
+@Autowired
+RegisterableService rs;
+@PostMapping("/post")
+public String saveData(@RequestBody RegistrationDetails r) {
+	RegistrationDetails	rd=rs.saveData(r);
+	return "YOUR DATA SUCCESSFULLY SAVED";
+}	
+@GetMapping("/get")	
+public Iterable<RegistrationDetails> getData(){
+	Iterable<RegistrationDetails>  list=rs.displayAlldata();
+	return list;
+}
+@PutMapping("/put")	
+
+}
+

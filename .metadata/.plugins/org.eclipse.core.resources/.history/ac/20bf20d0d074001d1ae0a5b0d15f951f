@@ -1,0 +1,93 @@
+package com.vip.CarLoanRegistation.app.impl;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.vip.CarLoanRegistation.app.exception.RegistrationDetailsNotFoundException;
+import com.vip.CarLoanRegistation.app.model.AccountDetails;
+import com.vip.CarLoanRegistation.app.model.Emi;
+import com.vip.CarLoanRegistation.app.model.NonselfEmployee;
+import com.vip.CarLoanRegistation.app.model.Profession;
+import com.vip.CarLoanRegistation.app.model.RegistrationDetails;
+import com.vip.CarLoanRegistation.app.model.SelfEmployee;
+import com.vip.CarLoanRegistation.app.model.SpouseDetails;
+import com.vip.CarLoanRegistation.app.repository.Registrationrepository;
+import com.vip.CarLoanRegistation.app.service.Registrationservice;
+@Service
+public class Registrationimpl implements Registrationservice {
+	
+@Autowired
+Registrationrepository rr;
+
+	@Override
+	public RegistrationDetails saveData(RegistrationDetails r) {
+
+		rr.save(r);
+
+		return rr.save(r);
+	}
+
+	@Override
+	public void deleteData(Integer r) {
+		rr.deleteById(r);
+		
+	}
+
+	@Override
+	public RegistrationDetails updateCustomerRegistration(RegistrationDetails r, Integer regId) 
+	{
+		Optional<RegistrationDetails> updateregistration = rr.findById(regId);
+		if(updateregistration.isPresent())
+		{
+						RegistrationDetails updatecustomerDetails = updateregistration.get();
+						
+						updatecustomerDetails.setRegDob(r.getRegDob());
+						updatecustomerDetails.setRegAge(r.getRegAge());
+						updatecustomerDetails.setRegGender(r.getRegGender());
+						updatecustomerDetails.setRegMobno(r.getRegMobno());
+						updatecustomerDetails.setRegOccopation(r.getRegOccopation());
+						
+				Integer customerspouseId = updatecustomerDetails.getRegSpouse().getSpouseId();
+				r.getRegSpouse().setSpouseId(customerspouseId);
+				updatecustomerDetails.setRegSpouse(r.getRegSpouse());
+				
+				Integer customeremiId = updatecustomerDetails.getEmi().getEmiId();
+				r.getEmi().setEmiId(customeremiId);
+				updatecustomerDetails.setEmi(r.getEmi());
+				
+				Integer customeraccId = updatecustomerDetails.getRegaccountdetails().getAccId();
+				r.getRegaccountdetails().setAccId(customeraccId);
+				updatecustomerDetails.setRegaccountdetails(r.getRegaccountdetails());
+				
+				Integer customerproId = updatecustomerDetails.getRegProfession().getProId();
+				r.getRegProfession().setProId(customerproId);
+				updatecustomerDetails.setRegProfession(r.getRegProfession());
+				
+				Integer customerselfempId = updatecustomerDetails.getRegProfession().getSelfEmployee().getSelfempId();
+				r.getRegProfession().getSelfEmployee().setSelfempId(customerselfempId);
+				updatecustomerDetails.setRegProfession(r.getRegProfession());
+				
+				Integer customernselfempId = updatecustomerDetails.getRegProfession().getNonSelfEmployee().getNselfempId();
+				r.getRegProfession().getNonSelfEmployee().setNselfempId(customernselfempId);
+				updatecustomerDetails.setRegProfession(r.getRegProfession());
+				
+				return rr.save(updatecustomerDetails);
+								
+		}else
+		{
+			throw new RegistrationDetailsNotFoundException("customer ID registration details not found..!1");
+		}
+		
+	}
+
+	@Override
+	public Iterable<RegistrationDetails> displayAllCustomerRegistration() {
+		
+		 return rr.findAll();
+	}	
+	}
+
+

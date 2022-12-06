@@ -1,0 +1,28 @@
+package com.vip.CarLoanRegistation.app.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+
+@Data
+@AllArgsConstructor
+@@NoArgsConstructor
+@ToString
+@Entity
+ public class RegistrationDetails {
+@Id
+private Integer regId;
+private String regDob;
+private Integer regAge;
+private String  regGender;
+private String regOccopation;
+private SpouseDetails regSpouse;
+private emi emi;
+private AccountDetails regaccountdetails;
+private Profession regProfession;
+}

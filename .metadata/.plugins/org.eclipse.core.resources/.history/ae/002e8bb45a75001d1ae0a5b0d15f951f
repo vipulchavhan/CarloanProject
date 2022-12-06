@@ -1,0 +1,21 @@
+server:
+      port: 9000 
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+     boot:
+       admin:
+        client:
+       url: http://localhost:1111/
+     routes:
+     - id: Registation
+       uri: lb://Registation
+       predicates:
+       - Path= /newcustomerregistration
+       
+     - id: Registation
+       uri: lb://Registation
+       predicates:
+       - Path= /viewRegistration

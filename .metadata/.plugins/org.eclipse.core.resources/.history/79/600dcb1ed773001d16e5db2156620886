@@ -1,0 +1,17 @@
+package com.vip.CarLoanRegistation.app.model;
+
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import lombok.Data;
+
+@Entity
+@Data
+public class Profession {
+@Id	
+private Integer proId;
+private List<SelfEmployee> selfEmployee;
+private List<NonselfEmployee> nonSelfEmployee;
+}

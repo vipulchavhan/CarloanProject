@@ -1,0 +1,69 @@
+package com.vip.CarLoanRegistation.app.controller;
+
+import javax.imageio.spi.RegisterableService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vip.CarLoanRegistation.app.model.AccountDetails;
+import com.vip.CarLoanRegistation.app.model.Emi;
+import com.vip.CarLoanRegistation.app.model.NonselfEmployee;
+import com.vip.CarLoanRegistation.app.model.Profession;
+import com.vip.CarLoanRegistation.app.model.RegistrationDetails;
+import com.vip.CarLoanRegistation.app.model.SelfEmployee;
+import com.vip.CarLoanRegistation.app.model.SpouseDetails;
+import com.vip.CarLoanRegistation.app.service.Registrationservice;
+
+@RestController
+public class RegistrationController {
+@Autowired
+Registrationservice rs;
+
+@PostMapping(value="/post",consumes= org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE)
+public ResponseEntity<RegistrationDetails> saveData(@RequestParam ("blankcheck")MultipartFile f1,@RequestParam ("bankStatement")MultipartFile f2,
+		@RequestParam ("form16")MultipartFile f3,@RequestParam ("photo")MultipartFile f4,@RequestParam ("signiture")MultipartFile f5,@RequestParam ("dravingLinces")MultipartFile f6,@RequestParam ("nsblankCheck")MultipartFile f7,
+		@RequestParam ("nsbanckStatement")MultipartFile f8,@RequestParam ("nsincomeproof")MultipartFile f9,@RequestParam ("nselectricityBill")MultipartFile f10,@RequestParam ("nsaddressProof")MultipartFile f11,@RequestParam ("nsphoto")MultipartFile f12,@RequestParam ("nssigniture")MultipartFile f13,
+		@PathVariable ("regId")Integer regId,@PathVariable ("regDob")String regDob,@PathVariable ("regAge")Integer regAge,@PathVariable ("regGender")String regGender,@PathVariable ("regMobno")Long regMobno,@PathVariable ("regOccopation")String regOccopation,
+		@PathVariable ("emiId")Integer emiId,@PathVariable ("principalAmount")Double principalAmount,@PathVariable ("emiAmount")Double emiAmount,@PathVariable ("interest")Integer interest,
+		@PathVariable ("tenure")Integer tenure,@PathVariable ("selfempId")Integer selfempId,@PathVariable ("nsName")String nsName,@PathVariable ("selfempAge")Integer selfempAge,@PathVariable ("occopation")String occopation,@PathVariable ("accId")Integer accId,@PathVariable ("accNo")Long accNo,@PathVariable ("accName")String accName,@PathVariable ("bankName")String bankName,
+		@PathVariable ("bankAddress")String bankAddress,@PathVariable ("ifcCode")String ifcCode,@PathVariable ("accType")String accType,@PathVariable ("nonselfempId")Integer nonselfempId,@PathVariable ("nonselfName")String nonselfName,@PathVariable ("nonselfEmployee")String nonselfEmployee,@PathVariable ("companyName")String companyName,@PathVariable ("businessName")String businessName,) {
+	
+	ObjectMapper om=new ObjectMapper();
+	RegistrationDetails rr=new RegistrationDetails();
+	
+	return new ResponseEntity<RegistrationDetails>(rd,HttpStatus.CREATED);
+}	
+
+@GetMapping(value="/get")	
+public ResponseEntity<Iterable<RegistrationDetails>> getData(){
+	Iterable<RegistrationDetails>  list=rs.displayAlldata();
+	return new ResponseEntity<Iterable<RegistrationDetails>>(list,HttpStatus.OK);
+}
+
+@PutMapping(value="/put/{regId}")	
+public ResponseEntity<RegistrationDetails> updateData(@RequestBody RegistrationDetails r,@PathVariable ("regId") Integer regId) {
+	rs.updateData(r, regId);
+	RegistrationDetails up=rs.saveData(r);
+	return new ResponseEntity<RegistrationDetails>(up,HttpStatus.OK);
+}
+
+@DeleteMapping(value="/delete/{regId}")
+public ResponseEntity deleteData(@PathVariable ("regId") Integer regId)
+		 {
+	rs.deleteData(regId);
+	return new ResponseEntity(HttpStatus.NO_CONTENT);
+}
+
+}
+

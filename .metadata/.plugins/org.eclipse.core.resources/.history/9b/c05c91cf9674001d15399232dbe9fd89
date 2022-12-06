@@ -1,0 +1,25 @@
+package com.vip.CarLoanRegistation.app.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import lombok.Data;
+@Data
+@Entity
+public class SelfEmployee {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer selfempId;
+	private String selfName;
+	private byte[] blankcheck;
+	private byte[] bankStatement;
+	private byte[] form16;
+	private String companyName;
+	private Integer age;
+	private byte[] photo;
+	private byte[] signiture;
+	private byte[] dravingLinces;
+	private String businessName;
+}

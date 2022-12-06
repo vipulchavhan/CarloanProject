@@ -1,0 +1,11 @@
+admin: ''
+application: ''
+boot: ''
+client: ''
+cloud: ''
+gateway: ''
+name: gateway
+port: 8585
+server: ''
+spring: ''
+url: http://localhost:1111

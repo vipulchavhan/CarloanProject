@@ -1,0 +1,55 @@
+package com.vip.CarLoanRegistation.app.controller;
+
+import javax.imageio.spi.RegisterableService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.vip.CarLoanRegistation.app.model.AccountDetails;
+import com.vip.CarLoanRegistation.app.model.Emi;
+import com.vip.CarLoanRegistation.app.model.NonselfEmployee;
+import com.vip.CarLoanRegistation.app.model.Profession;
+import com.vip.CarLoanRegistation.app.model.RegistrationDetails;
+import com.vip.CarLoanRegistation.app.model.SelfEmployee;
+import com.vip.CarLoanRegistation.app.model.SpouseDetails;
+import com.vip.CarLoanRegistation.app.service.Registrationservice;
+
+@RestController
+public class RegistrationController {
+@Autowired
+Registrationservice rs;
+
+@PostMapping(value="/post",consumes= org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE)
+public String saveData(@RequestBody RegistrationDetails r,@RequestBody AccountDetails acc,@RequestBody Emi em,
+		@RequestBody NonselfEmployee no,@RequestBody Profession pr,@RequestBody SelfEmployee se,@RequestBody SpouseDetails sp) {
+	RegistrationDetails	rd=rs.saveData(r);
+	return "YOUR DATA SUCCESSFULLY SAVED";
+}	
+
+@GetMapping("/get")	
+public Iterable<RegistrationDetails> getData(){
+	Iterable<RegistrationDetails>  list=rs.displayAlldata();
+	return list;
+}
+
+@PutMapping("/put/{regId}")	
+public String updateData(@RequestBody RegistrationDetails r,@PathVariable ("regId") Integer regId) {
+	rs.updateData(r, regId);
+	RegistrationDetails up=rs.saveData(r);
+	return "YOUR DATA SUCCESSFULLY UPDATED";
+}
+
+@DeleteMapping("/delete/{regId}")
+public String deleteData(@PathVariable ("regId") Integer regId) {
+	rs.deleteData(regId);
+	return"YOUR DATA SUCCESSFULLY DELETED";
+}
+
+}
+

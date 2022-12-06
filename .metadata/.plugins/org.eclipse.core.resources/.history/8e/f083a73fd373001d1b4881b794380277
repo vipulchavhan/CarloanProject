@@ -1,0 +1,11 @@
+package com.vip.CarLoanRegistation.app.service;
+
+import com.vip.CarLoanRegistation.app.model.RegistrationDetails;
+
+public interface Registrationservice {
+public RegistrationDetails saveData(RegistrationDetails r);
+public Iterable<RegistrationDetails> displayAlldata();
+public void deleteData(int regId);
+
+
+}

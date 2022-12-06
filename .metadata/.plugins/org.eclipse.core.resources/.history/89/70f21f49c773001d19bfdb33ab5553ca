@@ -1,0 +1,10 @@
+package com.vip.CarLoanRegistation.app.model;
+
+public class SpouseDetails {
+	private Integer spouseid;
+	private String spouseName;
+	private String spouserelation;
+	private String spouseDob;
+	private Long spouseMobno;
+
+}

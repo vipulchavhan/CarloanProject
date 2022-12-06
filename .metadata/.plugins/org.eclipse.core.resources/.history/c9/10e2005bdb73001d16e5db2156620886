@@ -1,0 +1,43 @@
+package com.vip.CarLoanRegistation.app.impl;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.vip.CarLoanRegistation.app.model.RegistrationDetails;
+import com.vip.CarLoanRegistation.app.repository.Registrationrepository;
+import com.vip.CarLoanRegistation.app.service.Registrationservice;
+@Service
+public class Registrationimpl implements Registrationservice {
+@Autowired
+Registrationrepository rr;
+	@Override
+	public RegistrationDetails saveData(RegistrationDetails r) {
+		rr.save(r);
+		return rr.save(r);
+	}
+
+	@Override
+	public Iterable<RegistrationDetails> displayAlldata() {
+		
+		return rr.findAll();
+	}
+
+	@Override
+	public void deleteData(Integer r) {
+		rr.deleteById(r);
+		
+	}
+
+	@Override
+	public RegistrationDetails updateData(RegistrationDetails r, Integer regId) {
+		Optional<RegistrationDetails> op=rr.findById(regId);
+		if(op.isPresent()) {
+			RegistrationDetails  re	=op.get();
+			
+		}
+		return null;
+	}
+
+}

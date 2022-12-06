@@ -1,0 +1,68 @@
+package com.vip.CarLoanRegistation.app.impl;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.vip.CarLoanRegistation.app.model.AccountDetails;
+import com.vip.CarLoanRegistation.app.model.Emi;
+import com.vip.CarLoanRegistation.app.model.NonselfEmployee;
+import com.vip.CarLoanRegistation.app.model.Profession;
+import com.vip.CarLoanRegistation.app.model.RegistrationDetails;
+import com.vip.CarLoanRegistation.app.model.SelfEmployee;
+import com.vip.CarLoanRegistation.app.model.SpouseDetails;
+import com.vip.CarLoanRegistation.app.repository.Registrationrepository;
+import com.vip.CarLoanRegistation.app.service.Registrationservice;
+@Service
+public class Registrationimpl implements Registrationservice {
+@Autowired
+Registrationrepository rr;
+
+	@Override
+	public RegistrationDetails saveData(RegistrationDetails r,AccountDetails acc, Emi em,
+			NonselfEmployee no, Profession pr, SelfEmployee se, SpouseDetails sp) {
+{
+		rr.save(r,acc,em,no,pr,se,sp);
+
+		return rr.save(r);
+	}}
+
+	@Override
+	public Iterable<RegistrationDetails> displayAlldata() {
+		
+		return rr.findAll();
+	}
+
+	@Override
+	public void deleteData(Integer r) {
+		rr.deleteById(r);
+		
+	}
+
+	@Override
+	public RegistrationDetails updateData(RegistrationDetails r, Integer regId ) {
+		Optional<RegistrationDetails> op=rr.findById(regId);
+		if(op.isPresent()) {
+			RegistrationDetails  re	=op.get();
+			re.setEmi(r.getEmi());
+			re.setRegaccountdetails(r.getRegaccountdetails());
+			re.setRegMobno(r.getRegMobno());
+			re.setRegDob(r.getRegDob());
+			re.setRegAge(r.getRegAge());
+			re.setRegGender(r.getRegGender());
+			re.setRegOccopation(r.getRegOccopation());
+			re.setRegProfession(r.getRegProfession());
+			re.setRegSpouse(r.getRegSpouse());
+			re.setRegaccountdetails(r.getRegaccountdetails());
+			
+		}
+		else {
+			
+			return null;
+		}
+		return op.get();
+	}
+
+}

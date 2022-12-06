@@ -1,0 +1,98 @@
+package com.vip.CarLoanRegistation.app.exception;
+
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.http.protocol.HttpService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+@ControllerAdvice
+public class RestExceptionHandler {
+@ExceptionHandler(AccountDetailsNotFoundException.class)
+//@ExceptionHandler(EmiNotFoundException.class)
+//@ExceptionHandler(NonselfFoundException.class)
+//@ExceptionHandler(ProfessionNotFoundException.class)
+//@ExceptionHandler(RegistrationDetailsNotFoundException.class)
+//@ExceptionHandler(SelfEmpolyeeNotFoundException.class)
+//@ExceptionHandler(SpouseNotFoundException.class)
+public ResponseEntity<ApiError>AccountDetailsNotFoundException(AccountDetailsNotFoundException a,HttpServletRequest r){
+ApiError ae=new ApiError();
+ae.setCode(HttpStatus.NOT_FOUND.value());
+ae.setError(HttpStatus.NOT_FOUND);
+ae.setMassage(a.getMessage());
+ae.setTimeDate(new Date());
+ae.setPath(r.getRequestURI());
+ae.setTrace(a.toString());
+return new ResponseEntity<ApiError>(ae,HttpStatus.NOT_FOUND);
+}
+
+@ExceptionHandler(EmiNotFoundException.class)
+public ResponseEntity<ApiError>EmiNotFoundException(EmiNotFoundException a1,HttpServletRequest r1){
+	ApiError ae1=new ApiError();
+	ae1.setCode(HttpStatus.NOT_FOUND.value());
+	ae1.setError(HttpStatus.NOT_FOUND);
+	ae1.setMassage(a1.getMessage());
+	ae1.setTimeDate(new Date());
+	ae1.setPath(r1.getRequestURI());
+	ae1.setTrace(a1.toString());
+	return new ResponseEntity<ApiError>(ae1,HttpStatus.NOT_FOUND);
+}	
+@ExceptionHandler(ProfessionNotFoundException.class)
+public ResponseEntity<ApiError>ProfessionNotFoundException(ProfessionNotFoundException a2,HttpServletRequest r2){
+	ApiError ae2=new ApiError();
+	ae2.setCode(HttpStatus.NOT_FOUND.value());
+	ae2.setError(HttpStatus.NOT_FOUND);
+	ae2.setMassage(a2.getMessage());
+	ae2.setTimeDate(new Date());
+	ae2.setPath(r2.getRequestURI());
+	ae2.setTrace(a2.toString());
+	return new ResponseEntity<ApiError>(ae2,HttpStatus.NOT_FOUND);
+}
+@ExceptionHandler(RegistrationDetailsNotFoundException.class)
+public ResponseEntity<ApiError>RegistrationDetailsNotFoundException(RegistrationDetailsNotFoundException a3,HttpServletRequest r3){
+	ApiError ae3=new ApiError();
+	ae3.setCode(HttpStatus.NOT_FOUND.value());
+	ae3.setError(HttpStatus.NOT_FOUND);
+	ae3.setMassage(a3.getMessage());
+	ae3.setTimeDate(new Date());
+	ae3.setPath(r3.getRequestURI());
+	ae3.setTrace(a3.toString());
+	return new ResponseEntity<ApiError>(ae3,HttpStatus.NOT_FOUND);
+}
+@ExceptionHandler(NonselfFoundException.class)
+public ResponseEntity<ApiError>NonselfFoundException(NonselfFoundException a4,HttpServletRequest r4){
+	ApiError ae4=new ApiError();
+	ae4.setCode(HttpStatus.NOT_FOUND.value());
+	ae4.setError(HttpStatus.NOT_FOUND);
+	ae4.setMassage(a4.getMessage());
+	ae4.setTimeDate(new Date());
+	ae4.setPath(r4.getRequestURI());
+	ae4.setTrace(a4.toString());
+	return new ResponseEntity<ApiError>(ae4,HttpStatus.NOT_FOUND);
+}
+@ExceptionHandler(SelfEmpolyeeNotFoundException.class)
+public ResponseEntity<ApiError>SelfEmpolyeeNotFoundException(SelfEmpolyeeNotFoundException a5,HttpServletRequest r5){
+	ApiError ae5=new ApiError();
+	ae5.setCode(HttpStatus.NOT_FOUND.value());
+	ae5.setError(HttpStatus.NOT_FOUND);
+	ae5.setMassage(a5.getMessage());
+	ae5.setTimeDate(new Date());
+	ae5.setPath(r5.getRequestURI());
+	ae5.setTrace(a5.toString());
+	return new ResponseEntity<ApiError>(ae5,HttpStatus.NOT_FOUND);
+}
+@ExceptionHandler(SpouseNotFoundException.class)
+public ResponseEntity<ApiError>SpouseNotFoundException(SpouseNotFoundException a6,HttpServletRequest r6){
+	ApiError ae6=new ApiError();
+	ae6.setCode(HttpStatus.NOT_FOUND.value());
+	ae6.setError(HttpStatus.NOT_FOUND);
+	ae6.setMassage(a6.getMessage());
+	ae6.setTimeDate(new Date());
+	ae6.setPath(r6.getRequestURI());
+	ae6.setTrace(a6.toString());
+	return new ResponseEntity<ApiError>(ae6,HttpStatus.NOT_FOUND);
+}}

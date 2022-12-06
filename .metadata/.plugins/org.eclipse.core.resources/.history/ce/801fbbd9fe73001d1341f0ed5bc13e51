@@ -1,0 +1,55 @@
+package com.vip.CarLoanRegistation.app.exception;
+
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.http.protocol.HttpService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+@ControllerAdvice
+public class RestExceptionHandler {
+@ExceptionHandler(AccountDetailsNotFoundException.class)
+//@ExceptionHandler(EmiNotFoundException.class)
+//@ExceptionHandler(NonselfFoundException.class)
+//@ExceptionHandler(ProfessionNotFoundException.class)
+//@ExceptionHandler(RegistrationDetailsNotFoundException.class)
+//@ExceptionHandler(SelfEmpolyeeNotFoundException.class)
+//@ExceptionHandler(SpouseNotFoundException.class)
+public ResponseEntity<ApiError>AccountDetailsNotFoundException(AccountDetailsNotFoundException a,HttpServletRequest r){
+ApiError ae=new ApiError();
+ae.setCode(HttpStatus.NOT_FOUND.value());
+ae.setError(HttpStatus.NOT_FOUND);
+ae.setMassage(a.getMessage());
+ae.setTimeDate(new Date());
+ae.setPath(r.getRequestURI());
+ae.setTrace(a.toString());
+return new ResponseEntity<ApiError>(ae,HttpStatus.NOT_FOUND);
+}
+
+@ExceptionHandler(EmiNotFoundException.class)
+public ResponseEntity<ApiError>AccountDetailsNotFoundException(EmiNotFoundException a1,HttpServletRequest r1){
+	ApiError ae1=new ApiError();
+	ae1.setCode(HttpStatus.NOT_FOUND.value());
+	ae1.setError(HttpStatus.NOT_FOUND);
+	ae1.setMassage(a1.getMessage());
+	ae1.setTimeDate(new Date());
+	ae1.setPath(r1.getRequestURI());
+	ae1.setTrace(a1.toString());
+	return new ResponseEntity<ApiError>(ae1,HttpStatus.NOT_FOUND);
+}	
+@ExceptionHandler(ProfessionNotFoundException.class)
+public ResponseEntity<ApiError>AccountDetailsNotFoundException(ProfessionNotFoundException a2,HttpServletRequest r2){
+	ApiError ae2=new ApiError();
+	ae2.setCode(HttpStatus.NOT_FOUND.value());
+	ae2.setError(HttpStatus.NOT_FOUND);
+	ae2.setMassage(a2.getMessage());
+	ae2.setTimeDate(new Date());
+	ae2.setPath(r2.getRequestURI());
+	ae2.setTrace(a2.toString());
+	return new ResponseEntity<ApiError>(ae2,HttpStatus.NOT_FOUND);
+}		
+}

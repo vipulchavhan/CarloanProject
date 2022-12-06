@@ -1,0 +1,16 @@
+package com.vip.CarLoanRegistation.app.model;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import lombok.Data;
+@Entity
+@Data
+public class emi {
+@Id	
+private Integer	emiId;
+private Double	principalAmount;
+private Double	emiAmount;
+private Integer	interest;
+private Integer	tenure;
+
+}

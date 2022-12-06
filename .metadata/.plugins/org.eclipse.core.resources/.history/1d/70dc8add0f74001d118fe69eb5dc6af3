@@ -1,0 +1,60 @@
+package com.vip.CarLoanRegistation.app.controller;
+
+import javax.imageio.spi.RegisterableService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.vip.CarLoanRegistation.app.model.AccountDetails;
+import com.vip.CarLoanRegistation.app.model.Emi;
+import com.vip.CarLoanRegistation.app.model.NonselfEmployee;
+import com.vip.CarLoanRegistation.app.model.Profession;
+import com.vip.CarLoanRegistation.app.model.RegistrationDetails;
+import com.vip.CarLoanRegistation.app.model.SelfEmployee;
+import com.vip.CarLoanRegistation.app.model.SpouseDetails;
+import com.vip.CarLoanRegistation.app.service.Registrationservice;
+
+@RestController
+public class RegistrationController {
+@Autowired
+Registrationservice rs;
+
+@PostMapping(value="/post",consumes= org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE)
+public ResponseEntity<RegistrationDetails> saveData(@RequestBody RegistrationDetails r,@RequestBody AccountDetails acc,@RequestBody Emi em,
+		@RequestBody NonselfEmployee no,@RequestBody Profession pr,@RequestBody SelfEmployee se,@RequestBody SpouseDetails sp) {
+	RegistrationDetails	rd=rs.saveData(r, acc, em, no, pr, se, sp);
+	return new ResponseEntity<RegistrationDetails>(rd,HttpStatus.CREATED);
+}	
+
+@GetMapping(value="/get")	
+public ResponseEntity<Iterable<RegistrationDetails>> getData(){
+	Iterable<RegistrationDetails>  list=rs.displayAlldata();
+	return new ResponseEntity<Iterable<RegistrationDetails>>(list,HttpStatus.OK);
+}
+
+@PutMapping(value="/put/{regId}/{accId}/{emiId}/{selfempId}/{proId}/{nonselfempId}/{spouseId}")	
+public String updateData(@RequestBody RegistrationDetails r,@PathVariable ("regId") Integer regId,@RequestBody AccountDetails acc,@PathVariable ("accId")Integer accId,
+		@RequestBody Emi em,@PathVariable ("emiId")Integer emiId,@RequestBody NonselfEmployee no ,@PathVariable ("selfempId")Integer selfempId,
+		@RequestBody Profession pr,@PathVariable ("proId")Integer proId,@RequestBody SelfEmployee se,@PathVariable ("nonselfempId")Integer nonselfempId,@RequestBody SpouseDetails sp,@PathVariable ("spouseId")Integer spouseId ) {
+	rs.updateData(r, regId,acc,accId,em,emiId,no,pr,proId,se,nonselfempId,sp,spouseId);
+	RegistrationDetails up=rs.saveData(r,acc,em,no,pr,se,sp);
+	return "YOUR DATA SUCCESSFULLY UPDATED";
+}
+
+@DeleteMapping(value="/delete/{regId}/{accId}/{emiId}/{selfempId}/{proId}/{nonselfempId}/{spouseId}")
+public String deleteData(@PathVariable ("regId") Integer regId,@PathVariable ("accId")Integer accId,@PathVariable ("emiId")Integer emiId,@PathVariable ("selfempId")Integer selfempId,@PathVariable ("proId")Integer proId,
+		@PathVariable ("nonselfempId")Integer nonselfempId,@PathVariable ("spouseId")Integer spouseId) {
+	rs.deleteData(regId,accId,emiId,selfempId,proId,nonselfempId,spouseId);
+	return"YOUR DATA SUCCESSFULLY DELETED";
+}
+
+}
+

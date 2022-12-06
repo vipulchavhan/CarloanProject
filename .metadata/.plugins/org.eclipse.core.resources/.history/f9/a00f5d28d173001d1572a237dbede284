@@ -1,0 +1,5 @@
+package com.vip.CarLoanRegistation.app.service;
+
+public interface Registrationservice {
+
+}

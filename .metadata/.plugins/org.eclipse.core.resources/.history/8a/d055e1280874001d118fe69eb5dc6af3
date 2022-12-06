@@ -1,0 +1,20 @@
+package com.vip.CarLoanRegistation.app.service;
+
+import com.vip.CarLoanRegistation.app.model.AccountDetails;
+import com.vip.CarLoanRegistation.app.model.Emi;
+import com.vip.CarLoanRegistation.app.model.NonselfEmployee;
+import com.vip.CarLoanRegistation.app.model.Profession;
+import com.vip.CarLoanRegistation.app.model.RegistrationDetails;
+import com.vip.CarLoanRegistation.app.model.SelfEmployee;
+import com.vip.CarLoanRegistation.app.model.SpouseDetails;
+
+public interface Registrationservice {
+public RegistrationDetails saveData(RegistrationDetails r,AccountDetails acc, Emi em,
+		NonselfEmployee no, Profession pr, SelfEmployee se, SpouseDetails sp);
+
+public Iterable<RegistrationDetails> displayAlldata();
+public void deleteData(Integer r);
+public RegistrationDetails updateData(RegistrationDetails r,Integer regId);
+
+
+}

@@ -1,0 +1,5 @@
+package com.vip.CarLoanRegistation.app.exception;
+
+public class RegistrationDetailsNotFoundException {
+
+}

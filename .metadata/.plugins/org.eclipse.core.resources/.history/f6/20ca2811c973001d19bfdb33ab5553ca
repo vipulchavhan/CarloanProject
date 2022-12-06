@@ -1,0 +1,22 @@
+package com.vip.CarLoanRegistation.app.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class NonselfEmployee {
+	@Id
+	private Integer selfempid;
+	private String selfempName;
+	private byte[] blankCheck;
+	private byte[] banckStatement;
+	private byte[] incomeProof;
+	private Integer selfempAge;
+	private String occopation ;
+	private byte[] electricityBill;
+	private byte[] addressProof;
+	private byte[] photo;
+	private byte[] signiture;
+	private byte[] dravingLince;
+
+}

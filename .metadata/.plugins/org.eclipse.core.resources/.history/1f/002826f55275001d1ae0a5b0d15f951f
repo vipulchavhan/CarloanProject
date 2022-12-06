@@ -1,0 +1,106 @@
+package com.vip.CarLoanRegistation.app.impl;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.vip.CarLoanRegistation.app.exception.RegistrationDetailsNotFoundException;
+import com.vip.CarLoanRegistation.app.model.AccountDetails;
+import com.vip.CarLoanRegistation.app.model.Emi;
+import com.vip.CarLoanRegistation.app.model.NonselfEmployee;
+//import com.vip.CarLoanRegistation.app.model.Profession;
+import com.vip.CarLoanRegistation.app.model.RegistrationDetails;
+import com.vip.CarLoanRegistation.app.model.SelfEmployee;
+import com.vip.CarLoanRegistation.app.model.SpouseDetails;
+import com.vip.CarLoanRegistation.app.repository.Registrationrepository;
+import com.vip.CarLoanRegistation.app.service.Registrationservice;
+@Service
+public class Registrationimpl implements Registrationservice {
+	
+@Autowired
+Registrationrepository rr;
+
+	@Override
+	public RegistrationDetails saveData(RegistrationDetails r) {
+
+
+		return rr.save(r);
+	}
+
+	@Override
+	public RegistrationDetails updateCustomerRegistration(RegistrationDetails r, Integer regId) 
+	{
+		Optional<RegistrationDetails> updateregistration = rr.findById(regId);
+		if(updateregistration.isPresent())
+		{
+						RegistrationDetails updatecustomerDetails = updateregistration.get();
+//						Integer emiId = updatecustomerDetails.getEmi().getEmiId();
+//						Integer nonselfempId = updatecustomerDetails.getNonselfEmployee().getNonselfempId();
+//						Integer accId = updatecustomerDetails.getRegaccountdetails().getAccId();
+//						Integer spouseId = updatecustomerDetails.getRegSpouse().getSpouseId();
+//						Integer selfempId = updatecustomerDetails.getSelfEmployee().getSelfempId();
+//						r.getEmi().setEmiId(emiId);
+//						r.getNonselfEmployee().setNonselfempId(nonselfempId);
+//						r.getRegaccountdetails().setAccId(accId);
+//						r.getRegSpouse().setSpouseId(spouseId);
+//						r.getSelfEmployee().setSelfempId(selfempId);
+						
+						updatecustomerDetails.setRegDob(r.getRegDob());
+						updatecustomerDetails.setRegAge(r.getRegAge());
+						updatecustomerDetails.setRegGender(r.getRegGender());
+						updatecustomerDetails.setRegMobno(r.getRegMobno());
+						updatecustomerDetails.setRegOccopation(r.getRegOccopation());
+						
+				Integer customerspouseId = updatecustomerDetails.getRegSpouse().getSpouseId();
+				r.getRegSpouse().setSpouseId(customerspouseId);
+				updatecustomerDetails.setRegSpouse(r.getRegSpouse());
+				System.out.println(customerspouseId);
+				
+				Integer customeremiId = updatecustomerDetails.getEmi().getEmiId();
+				System.out.println(customeremiId);
+				r.getEmi().setEmiId(customeremiId);
+				updatecustomerDetails.setEmi(r.getEmi());
+				
+				Integer customeraccId = updatecustomerDetails.getRegaccountdetails().getAccId();
+				System.out.println(customeraccId);
+				r.getRegaccountdetails().setAccId(customeraccId);
+				updatecustomerDetails.setRegaccountdetails(r.getRegaccountdetails());
+				
+				Integer customerproId = updatecustomerDetails.getSelfEmployee().getSelfempId();
+				System.out.println(customerproId);
+				r.getSelfEmployee().setSelfempId(customerproId);
+				updatecustomerDetails.setSelfEmployee(r.getSelfEmployee());
+				
+				Integer customerselfempId = updatecustomerDetails.getNonselfEmployee().getNonselfempId();
+				System.out.println(customerselfempId);
+				r.getNonselfEmployee().setNonselfempId(customerselfempId);
+				updatecustomerDetails.setSelfEmployee(r.getSelfEmployee());
+				
+				
+				return rr.save(updatecustomerDetails);
+								
+		}else
+		{
+			throw new RegistrationDetailsNotFoundException("customer ID registration details not found..!1");
+		}
+		
+	}
+
+	@Override
+	public Iterable<RegistrationDetails> displayAllCustomerRegistration() {
+		
+		 return rr.findAll();
+	}
+
+	@Override
+	public void removeregistrationdetails(Integer regId) {
+		rr.deleteById(regId);
+		
+	}
+
+	
+	}
+
+

@@ -1,0 +1,32 @@
+package com.vip.CarLoanRegistation.app.model;
+
+import javax.annotation.Generated;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+public class NonselfEmployee {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer nonselfempId;
+	private String nonselfempName;
+	private byte[] nonselfempBlankcheque;
+	private byte[] nonselfempBankstatement;
+	private byte[] nonselfeempIncomeproof;
+	private Integer nonselfempAge;
+	private String nonselfempOccopation ;
+	private byte[] nonselfempElectricitybill;
+	private byte[] nonselfempAddressproof;
+	private byte[] nonselfempPhoto;
+	private byte[] nonselfempSignature;
+	
+
+}
